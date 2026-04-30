@@ -823,7 +823,16 @@ def prediction_page():
                 all_sk = list(dict.fromkeys(resume_data.get("skills",[]) + ctx_skills))
                 resume_data["skills"] = all_sk
 
-                output = analyze_resume_with_llm(job_role, raw_text)
+                output = analyze_resume_with_llm(
+                    job_role, raw_text,
+                    cgpa=cgpa,
+                    num_internships=num_internships,
+                    num_projects=num_projects,
+                    num_certs=num_certs,
+                    intern_ctx=intern_ctx,
+                    proj_ctx=proj_ctx,
+                    cert_ctx=cert_ctx,
+                )
                 st.session_state.resume_result   = resume_data
                 st.session_state.resume_text     = raw_text
                 st.session_state.analysis_output = output
